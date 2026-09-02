@@ -35,7 +35,7 @@
     .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
     .hero-side{align-self:end;padding-bottom:8px}
     .intro{font-size:clamp(18px,2vw,28px);line-height:1.35;letter-spacing:-.035em;max-width:460px;margin:0 0 40px}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-meta{display:grid;gap:0;margin:0 0 34px;border-top:1px solid var(--line)}.hero-meta span{display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}.hero-meta small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
     .pill{display:inline-flex;align-items:center;gap:18px;padding:15px 22px;border:1px solid var(--ink);border-radius:999px;font-size:14px;transition:background .25s,color .25s,transform .25s}
     .pill:hover{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
     .pill.acid{background:var(--acid)}
@@ -107,7 +107,7 @@
   <header class="nav" aria-label="主导航">
     <a class="brand" href="#top">INGNAH®</a>
     <nav class="nav-links">
-      <a href="#work">作品</a><a href="#skills">能力</a><a href="#about">关于</a>
+      <a href="#work">作品</a><a href="#skills">能力</a>
     </nav>
   </header>
   <main>
@@ -117,10 +117,14 @@
         <h1 class="hero-title"><span><i>ING</i></span><span><i class="outline">NAH.</i></span></h1>
       </div>
       <div class="hero-side reveal">
-        <p class="intro">把复杂的信息变得清晰，把新的技术变成有温度的视觉体验。</p>
+        <p class="intro">我是 INGNAH，一名关注视觉、界面与 AI 创意的设计师。把复杂的信息变得清晰，也把新的技术变成有温度的视觉体验。</p>
+        <div class="hero-meta" aria-label="个人信息">
+          <span><small>Focus</small> Visual / UI / AI</span>
+          <span><small>Based in</small> Asia</span>
+          <span><small>Status</small> Open for selected work</span>
+        </div>
         <div class="hero-actions">
           <a class="pill acid" href="#work">查看作品 <span>↘</span></a>
-          <a class="pill" href="#about">认识我</a>
         </div>
       </div>
       <div class="scroll-note">Scroll to explore</div>
@@ -153,17 +157,6 @@
         <a class="project reveal" href="#" aria-label="智能产品体验项目"><span class="project-no">02</span><h3>智能产品体验 <span class="arrow">↗</span></h3><div class="tags"><span>Product</span><span>AI</span></div></a>
         <a class="project reveal" href="#" aria-label="移动界面设计项目"><span class="project-no">03</span><h3>移动界面设计 <span class="arrow">↗</span></h3><div class="tags"><span>Mobile</span><span>UI/UX</span></div></a>
         <a class="project reveal" href="#" aria-label="动态视觉实验项目"><span class="project-no">04</span><h3>动态视觉实验 <span class="arrow">↗</span></h3><div class="tags"><span>Motion</span><span>Lab</span></div></a>
-      </div>
-    </section>
-    <section class="about" id="about">
-      <div><div class="kicker reveal">03 — About</div></div>
-      <div>
-        <p class="about-copy reveal">我是 INGNAH，一名关注视觉、界面与 AI 创意的设计师。喜欢干净的结构，也喜欢恰到好处的意外。</p>
-        <div class="about-meta reveal" style="margin-top:60px">
-          <div class="meta-row"><span>Focus</span><strong>Visual / UI / AI</strong></div>
-          <div class="meta-row"><span>Based in</span><strong>Asia</strong></div>
-          <div class="meta-row"><span>Status</span><strong>Open for selected work</strong></div>
-        </div>
       </div>
     </section>
   </main>
