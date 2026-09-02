@@ -20,12 +20,12 @@
     .loader.done{translate:0 -105%}
     .loader-mark{font-size:clamp(52px,12vw,170px);font-weight:900;letter-spacing:-.09em;animation:pulse .75s ease-in-out infinite alternate}
     @keyframes pulse{to{opacity:.35;transform:scale(.97)}}
-    .nav{height:86px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:50%;width:min(100%,var(--page));transform:translateX(-50%);z-index:20;mix-blend-mode:difference;color:white}
+    .nav{height:76px;padding:0 clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:50%;width:min(100%,1180px);transform:translateX(-50%);z-index:20;background:rgba(245,245,242,.88);color:var(--ink);border-bottom:1px solid rgba(16,16,16,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
     .brand{font-weight:800;letter-spacing:-.04em;font-size:20px}
-    .nav-links{display:flex;gap:clamp(16px,3vw,44px);font-size:14px}
-    .nav a{position:relative}
-    .nav-links a:after{content:"";position:absolute;height:1px;left:0;right:0;bottom:-5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s}
-    .nav-links a:hover:after{transform:scaleX(1);transform-origin:left}
+    .nav-links{position:relative;display:flex;gap:clamp(18px,3vw,42px);font-size:14px;--nav-x:0px;--nav-w:0px;--nav-o:0}
+    .nav-links a{position:relative;padding:29px 0 26px;opacity:.52;transition:opacity .35s ease,transform .35s cubic-bezier(.16,1,.3,1)}
+    .nav-links a:hover,.nav-links a.active{opacity:1;transform:translateY(-1px)}
+    .nav-indicator{position:absolute;left:0;bottom:-1px;width:var(--nav-w);height:2px;background:var(--ink);transform:translateX(var(--nav-x));opacity:var(--nav-o);transition:width .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),opacity .25s}
     .hero{max-width:var(--page);margin-inline:auto;background:var(--paper);min-height:100svh;padding:140px var(--pad) 42px;display:grid;grid-template-columns:1.4fr .6fr;gap:40px;position:relative;border-bottom:1px solid var(--line);align-items:end}
     .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.16em;margin:0 0 24px;color:var(--muted)}
     h1{font-size:clamp(74px,14vw,210px);line-height:.76;letter-spacing:-.095em;margin:0;font-weight:900}
@@ -85,7 +85,7 @@
     .footer-title{font-size:clamp(60px,13vw,190px);font-weight:900;letter-spacing:-.085em;line-height:.8;margin:0 0 70px}
     .footer-line{display:flex;justify-content:space-between;gap:30px;border-top:1px solid rgba(0,0,0,.3);padding-top:22px;font-size:13px}
     @media(max-width:1180px){body{background:var(--paper)}}@media(max-width:800px){
-      .nav{height:70px}.nav-links a:nth-child(2){display:none}
+      .nav{height:70px}.nav-links a{padding-top:26px;padding-bottom:23px}.nav-links a:nth-child(2){display:none}
       .hero{grid-template-columns:1fr;padding-top:120px;align-content:center}.hero-side{margin-top:36px}
       h1{font-size:clamp(68px,24vw,120px)}.scroll-note{display:none}
       .section-head,.about{grid-template-columns:1fr}.section-head{gap:20px;margin-bottom:50px}
@@ -106,8 +106,8 @@
   <div class="cursor-glow" aria-hidden="true"></div>
   <header class="nav" aria-label="主导航">
     <a class="brand" href="#top">INGNAH®</a>
-    <nav class="nav-links">
-      <a href="#work">作品</a><a href="#skills">能力</a><a href="./resume.html">简历</a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#work" data-nav="work">作品</a><a href="#skills" data-nav="skills">能力</a><a href="./resume.html" data-nav="resume">简历</a><span class="nav-indicator" aria-hidden="true"></span>
     </nav>
   </header>
   <main>
@@ -206,6 +206,29 @@
       });
       card.addEventListener('pointerleave', () => card.style.transform = '');
     });
+
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const navBox = document.querySelector('.nav-links');
+    function moveIndicator(link){
+      navLinks.forEach(a => a.classList.toggle('active', a === link));
+      if(!link){ navBox.style.setProperty('--nav-o','0'); return; }
+      navBox.style.setProperty('--nav-x', link.offsetLeft + 'px');
+      navBox.style.setProperty('--nav-w', link.offsetWidth + 'px');
+      navBox.style.setProperty('--nav-o','1');
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => moveIndicator(link)));
+    const sectionNav = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          moveIndicator(document.querySelector('[data-nav="' + entry.target.dataset.navSection + '"]'));
+        }
+      });
+    }, {rootMargin:'-35% 0px -55% 0px',threshold:0});
+    document.querySelector('#work').dataset.navSection='work';
+    document.querySelector('#skills').dataset.navSection='skills';
+    sectionNav.observe(document.querySelector('#work'));
+    sectionNav.observe(document.querySelector('#skills'));
+    addEventListener('resize', () => moveIndicator(document.querySelector('.nav-links a.active')), {passive:true});
     document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
   </script>
 </body>
