@@ -1,0 +1,10 @@
+import {createRoot} from 'react-dom/client';
+import Portfolio from './portfolio';
+import Detail from './detail';
+import Resume from './resume/page';
+import NotFound from './not-found';
+import {initialContent} from './data';
+import './globals.css';
+const path=location.pathname.replace(/\/$/,'')||'/';
+const project=initialContent.projects.find(p=>path==='/project/'+p.id);
+createRoot(document.getElementById('root')!).render(path==='/'?<Portfolio/>:path==='/resume'?<Resume/>:project?<Detail id={project.id}/>:<NotFound/>);
