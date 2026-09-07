@@ -1,7 +1,5 @@
 # 设计作品集
 
-纯展示网站，部署在 GitHub Pages。保留首页、五个项目详情、简历、作品分类与移动端导航，不含后台、上传或本地草稿。
+根目录为已编译的完整静态网站，由 GitHub Pages 直接发布。完整源码在 source/。
 
-开发：`npm ci`，`npm run dev`。构建：`npm run build`，输出 `dist/`。
-
-文字与图片路径集中在 `app/content.json`。图片可放入 `public/images/`，填写 `/images/文件名`。当前未提供的作品图片与联系方式仍显示待补充。
+修改：在 source/ 执行 npm ci 和 npm run build，将 source/dist/ 的内容同步至仓库根目录即可。无需 Sites 或后台。
