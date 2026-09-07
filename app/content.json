@@ -1,0 +1,20 @@
+{
+  "brand": "设计进行时",
+  "name": "",
+  "role": "UI 设计师",
+  "location": "南京",
+  "intro": "8 年商业设计经验。专注移动端 UI，也为运营活动注入视觉活力。",
+  "about": "持续参与中国移动相关数字产品设计，涵盖功能界面、组件与运营活动。从项目初期建设到后续迭代，关注信息层级、视觉一致性与实际落地；也持续实践 AI 生图、视频与设计工作流。",
+  "email": "",
+  "wechat": "",
+  "resumeUrl": "",
+  "previewMode": true,
+  "projects": [
+    {"id":"zhejiang","title":"浙江移动 App","category":"UI 设计","tagline":"连接每一种日常","tags":"功能界面 / 组件 / 运营视觉","period":"近期 · 持续参与","role":"功能页面、组件及运营活动设计","summary":"从项目初期参与 App 建设，在团队确定的视觉方向下负责部分功能页面、组件及运营活动设计，并持续参与后续迭代。","collaboration":"团队协作项目。整体风格、首页与个人中心由其他设计师牵头，本案例聚焦我负责的功能页面、组件与运营设计。","cover":"","visible":true,"sections":[{"id":"screens","title":"功能界面设计","text":"","layout":"pair","images":[]},{"id":"components","title":"组件与设计细节","text":"","layout":"full","images":[]},{"id":"campaigns","title":"运营活动视觉","text":"","layout":"full","images":[]},{"id":"outcome","title":"落地与迭代","text":"","layout":"full","images":[]}]},
+    {"id":"aigou","title":"江苏移动爱购商城","category":"UI 设计","tagline":"让好物，更近一步","tags":"商城 UI / 运营视觉 / 持续迭代","period":"近期 · 持续参与","role":"商城 UI 与运营活动设计","summary":"在项目已有基础上加入设计工作，持续参与商城 UI 与运营活动设计，在既有产品框架中推进页面更新与视觉延展。","collaboration":"团队协作项目，项目中途加入。具体负责页面与设计过程将在作品整理后补充。","cover":"","visible":true,"sections":[{"id":"screens","title":"商城界面设计","text":"","layout":"pair","images":[]},{"id":"details","title":"设计细节与迭代","text":"","layout":"full","images":[]},{"id":"campaigns","title":"运营活动与延展","text":"","layout":"full","images":[]}]},
+    {"id":"jiangsu","title":"江苏移动掌厅","category":"UI 设计","tagline":"熟悉的服务，清晰的界面","tags":"个人中心 / 首页楼层 / 页面设计","period":"约 3 年前","role":"个人中心、首页部分楼层及相关页面设计","summary":"参与江苏移动掌厅的个人中心、首页部分楼层及相关页面设计，在既有产品规范下完成模块化界面设计与视觉落地。","collaboration":"团队协作项目。本案例仅展示个人负责的模块，不代表独立设计整个 App。","cover":"","visible":true,"sections":[{"id":"profile","title":"个人中心","text":"","layout":"pair","images":[]},{"id":"home","title":"首页楼层设计","text":"","layout":"full","images":[]},{"id":"details","title":"界面细节","text":"","layout":"pair","images":[]}]},
+    {"id":"visual","title":"运营视觉精选","category":"运营视觉","tagline":"给每一次活动，一点新鲜感","tags":"活动长图 / 海报 / Banner","period":"作品整理中","role":"运营活动视觉设计","summary":"在移动端商业场景中，探索活动主题、信息层级与视觉表现。","collaboration":"具体活动背景与个人职责随作品补充。","cover":"","visible":true,"sections":[{"id":"keyvisual","title":"活动主视觉","text":"","layout":"full","images":[]},{"id":"longform","title":"活动长图","text":"","layout":"full","images":[]},{"id":"extensions","title":"多尺寸延展","text":"","layout":"pair","images":[]}]},
+    {"id":"creative","title":"IP 与创意探索","category":"创意探索","tagline":"把一点想象，变成一种表达","tags":"IP 形象 / AI 视觉 / 创意探索","period":"作品整理中","role":"IP 形象与创意设计","summary":"在界面之外，持续探索角色形象与 AI 辅助的视觉表达。","collaboration":"具体作品的创作方式、AI 参与范围与个人工作随作品补充。","cover":"","visible":true,"sections":[{"id":"character","title":"IP 形象设计","text":"","layout":"full","images":[]},{"id":"applications","title":"形象延展与应用","text":"","layout":"pair","images":[]},{"id":"exploration","title":"AI 创作与过程","text":"","layout":"full","images":[]}]}
+  ]
+}
+
