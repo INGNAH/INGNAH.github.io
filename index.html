@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="INGNAH — Visual / UI Designer & AI Design Portfolio">
   <title>INGNAH — Visual / UI Designer</title>
+  <script>
+    if (sessionStorage.getItem('ingnahLoaderSeen')) {
+      document.documentElement.classList.add('skip-loader');
+    }
+  </script>
   <style>
     :root{--ink:#101010;--paper:#f3f2ed;--acid:#c7ff38;--line:rgba(16,16,16,.18);--muted:#6e6d68;--pad:clamp(20px,4vw,56px);--page:1180px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;background:#ddddd7;color:var(--ink);font-family:Inter,"Helvetica Neue",Arial,"PingFang SC",sans-serif;overflow-x:hidden}
     body.loading{overflow:hidden}
+    .skip-loader body.loading{overflow-x:hidden;overflow-y:auto}
+    .skip-loader .loader{display:none}
+    .skip-loader .hero-title i{transform:none}
     a{color:inherit;text-decoration:none}
     button{font:inherit}
     .noise{position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
@@ -167,13 +175,22 @@
   </footer>
   <script>
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    addEventListener('load', () => {
-      setTimeout(() => {
-        document.querySelector('.loader').classList.add('done');
-        document.body.classList.remove('loading');
-        document.body.classList.add('ready');
-      }, reduced ? 0 : 650);
-    });
+    const loaderSeen = sessionStorage.getItem('ingnahLoaderSeen');
+    const loader = document.querySelector('.loader');
+    if (loaderSeen) {
+      loader.classList.add('done');
+      document.body.classList.remove('loading');
+      document.body.classList.add('ready');
+    } else {
+      addEventListener('load', () => {
+        sessionStorage.setItem('ingnahLoaderSeen', '1');
+        setTimeout(() => {
+          loader.classList.add('done');
+          document.body.classList.remove('loading');
+          document.body.classList.add('ready');
+        }, reduced ? 0 : 650);
+      });
+    }
     const io = new IntersectionObserver(entries => {
       entries.forEach((entry, i) => {
         if(entry.isIntersecting){
