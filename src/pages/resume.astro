@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { resumeTdk } from '../data/content';
+import { resume } from '../data/resume';
+
+const sections = [
+  { number: '01', title: '工作经历', label: 'EXPERIENCE', entries: resume.experience, empty: '工作经历待补充', hint: '公司、职位、任职时间与主要成果' },
+  { number: '02', title: '教育背景', label: 'EDUCATION', entries: resume.education, empty: '教育背景待补充', hint: '学校、专业、学历与就读时间' },
+];
+---
+<BaseLayout title={resumeTdk.title} description={resumeTdk.description} keywords={resumeTdk.keywords}>
+  <main class="resume container">
+    <header class="resume-heading">
+      <span class="eyebrow">RESUME</span>
+      <h1 class="font-huiwen">个人简历</h1>
+      <p class="intro">我的经历、专业能力与成长轨迹。</p>
+    </header>
+
+    <section class="profile" aria-label="基本信息">
+      <div>
+        <span class="small-label">PROFILE</span>
+        <h2>{resume.name}</h2>
+        <p class="role">{resume.role || '求职方向待补充'}</p>
+      </div>
+      <div class="profile-details">
+        <p>{resume.summary || '个人简介待补充'}</p>
+        <dl>
+          <div><dt>所在城市</dt><dd>{resume.location || '待补充'}</dd></div>
+          <div><dt>联系邮箱</dt><dd>{resume.email ? <a href={`mailto:${resume.email}`}>{resume.email}</a> : '待补充'}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    {sections.map(section => (
+      <section class="resume-section">
+        <div class="section-label">
+          <span class="section-number">{section.number}</span>
+          <h2>{section.title}</h2>
+          <span class="small-label">{section.label}</span>
+        </div>
+        <div class="section-body">
+          {section.entries.length ? section.entries.map(entry => (
+            <article class="entry">
+              <span class="period">{entry.period}</span>
+              <h3>{entry.title}</h3>
+              <p class="organization">{entry.organization}</p>
+              <ul>{entry.details.map(detail => <li>{detail}</li>)}</ul>
+            </article>
+          )) : <div class="empty-entry"><h3>{section.empty}</h3><p>{section.hint}</p></div>}
+        </div>
+      </section>
+    ))}
+
+    <section class="resume-section">
+      <div class="section-label">
+        <span class="section-number">03</span>
+        <h2>专业技能</h2>
+        <span class="small-label">SKILLS</span>
+      </div>
+      <div class="section-body">
+        {resume.skills.length ? <ul class="skills">{resume.skills.map(skill => <li>{skill}</li>)}</ul> :
+          <div class="empty-entry"><h3>专业技能待补充</h3><p>擅长的设计领域、软件工具与专业能力</p></div>}
+      </div>
+    </section>
+    <a class="portfolio-link" href="/project/">查看项目作品 <span aria-hidden="true">↗</span></a>
+  </main>
+</BaseLayout>
+
+<style>
+  .resume { max-width: 1020px; padding-bottom: 80px; }
+  .resume-heading { text-align: center; padding: 56px 0 52px; }
+  .eyebrow { display: inline-block; border: 1px solid var(--color-700); border-radius: 100px; padding: 4px 22px; font-size: 12px; letter-spacing: 2px; }
+  h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 500; margin: 22px 0; }
+  .intro, .role, .profile-details, .empty-entry p, .organization { color: var(--color-400); }
+  .profile { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; border-top: 1px solid var(--color-700); padding: 40px 0; }
+  .small-label { font-size: 11px; letter-spacing: 2px; color: var(--color-400); }
+  .profile h2 { font-size: 32px; margin: 12px 0 8px; font-weight: 500; }
+  .profile-details p { margin-bottom: 20px; line-height: 1.8; }
+  dl { display: grid; gap: 12px; }
+  dl div { display: grid; grid-template-columns: 88px 1fr; gap: 16px; }
+  dt { font-size: 13px; } dd { margin: 0; overflow-wrap: anywhere; }
+  .resume-section { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; padding: 36px 0; border-top: 1px solid var(--color-700); }
+  .section-number { display: block; font-size: 12px; color: var(--color-400); margin-bottom: 10px; }
+  .section-label h2 { font-size: 22px; font-weight: 500; margin-bottom: 6px; }
+  .section-body h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .empty-entry { padding: 12px 0; }
+  .empty-entry p { font-size: 14px; line-height: 1.8; }
+  .entry + .entry { margin-top: 28px; }
+  .period { color: var(--color-400); font-size: 12px; display: block; margin-bottom: 12px; }
+  .entry ul { padding-left: 20px; margin-top: 12px; line-height: 1.8; }
+  .skills { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; }
+  .skills li { border: 1px solid var(--color-700); padding: 8px 18px; border-radius: 100px; }
+  .portfolio-link { display: inline-flex; gap: 24px; padding: 14px 22px; border: 1px solid var(--color-700); border-radius: 100px; margin-top: 24px; }
+  .portfolio-link:hover { background: var(--color-100); color: var(--color-999); }
+  @media (max-width: 640px) {
+    .resume-heading { padding: 32px 0; }
+    .profile, .resume-section { grid-template-columns: 1fr; gap: 24px; padding: 28px 0; }
+    .intro { font-size: 14px; }
+  }
+</style>

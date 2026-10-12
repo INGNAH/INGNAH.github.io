@@ -7,7 +7,7 @@
 
 GitHub Pages：在仓库 Settings → Pages → Build and deployment 中选择 GitHub Actions。推送到 main 后，`.github/workflows/pages.yml` 会构建并部署 dist/。不要手动将构建输出复制到仓库根目录。
 
-作品入口：`src/data/home.json`；站点介绍与导航：`src/data/content.ts`；关于页：`src/pages/about.astro`；博客：`src/content/blog/`。以下保留原模板使用说明。
+作品入口：`src/data/home.json`；站点介绍与导航：`src/data/content.ts`；关于页：`src/pages/about.astro`；简历信息：`src/data/resume.ts`。博客与 RSS 已移除，旧 `/blog/` 地址跳转至 `/resume/`，导航 GitHub 星标入口已移除。以下保留原模板使用说明。
 
 ---
 
@@ -126,30 +126,9 @@ PUBLIC_UMAMI_ID=
 - `mark`：是否显示推荐标记。
 - `opensource`：是否显示开源相关状态。
 
-## 博客内容
+## 简历页面
 
-博客已经迁移到 Astro 6 Content Layer API。
-
-- 内容配置：`src/content.config.ts`
-- 博客目录：`src/content/blog/`
-- 支持格式：`*.md` 和 `*.mdx`
-
-文章 frontmatter 示例：
-
-```yaml
----
-title: Article title
-description: Article description
-publishDate: 2026-06-07
-read: 5
-tags:
-  - Astro
-img: /preview-01.jpg
-img_alt: Preview image
----
-```
-
-旧版 `src/content/config.ts` 已迁移为根目录下的 `src/content.config.ts`，并使用 `astro/loaders` 里的 `glob()` loader。
+页面位于 `src/pages/resume.astro`，个人信息、工作经历、教育背景和技能集中在 `src/data/resume.ts`。真实资料尚未提供的字段显示待补充，不填入虚构经历。原模板博客内容仅保留在源码中，不再生成文章页或 RSS。
 
 ## 项目详情页
 
@@ -160,22 +139,6 @@ src/pages/detail/
 ```
 
 如果作品卡片的 `detail` 填写站内路径，例如 `/detail/todo`，需要在 `src/pages/detail/` 下创建对应的 `.astro` 页面。详情页中的本地图片列表已使用 `import.meta.glob()`，并配合 Astro 的 `<Image />` 组件处理图片。
-
-## GitHub Stars
-
-右上角导航和移动端菜单已经加入 GitHub 图标与 star 数量组件：
-
-```text
-src/components/GitHubStars.astro
-```
-
-页面加载后会请求 GitHub 公共 API：
-
-```text
-https://api.github.com/repos/ricocc/public-portfolio-site
-```
-
-组件会使用仓库真实的 `stargazers_count` 更新页面上的 star 数量。未登录的 GitHub API 有访问频率限制，如果部署后访问量较大，建议改成带缓存的服务端接口。
 
 ## 字体
 
