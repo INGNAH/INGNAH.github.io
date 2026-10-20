@@ -1,0 +1,87 @@
+<script>
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let observer: IntersectionObserver | undefined;
+
+  function revealContent() {
+    observer?.disconnect();
+    document.querySelectorAll('[data-reveal]').forEach(element => {
+      element.removeAttribute('data-reveal');
+    });
+    if (preference.matches || !('IntersectionObserver' in window)) return;
+
+    observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute('data-reveal', 'visible');
+          observer?.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+
+    // Animate inner card content: Shuffle owns the outer card transform.
+    const elements = document.querySelectorAll<HTMLElement>(
+      '.card-header, .card-body, .card-footer, .resume .profile, .resume-section, .project-item, .post-wrapper > section'
+    );
+    elements.forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${(index % 3) * 65}ms`);
+      element.setAttribute('data-reveal', 'pending');
+      observer?.observe(element);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealContent, { once: true });
+  } else {
+    revealContent();
+  }
+  document.addEventListener('astro:page-load', revealContent);
+  preference.addEventListener('change', revealContent);
+</script>
+
+<style is:global>
+  @keyframes portfolio-enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .section-header .title-tag, .resume-heading .eyebrow {
+      animation: portfolio-enter 650ms both;
+    }
+    .section-header h1, .resume-heading h1 {
+      animation: portfolio-enter 750ms 90ms both;
+    }
+    .section-desc, .resume-heading .intro {
+      animation: portfolio-enter 750ms 180ms both;
+    }
+    .section-social, .filter-wrapper {
+      animation: portfolio-enter 750ms 270ms both;
+    }
+    [data-reveal] {
+      transition: opacity 650ms ease var(--reveal-delay, 0ms),
+        translate 650ms cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms);
+    }
+    [data-reveal='pending'] { opacity: 0; translate: 0 20px; }
+    [data-reveal='visible'] { opacity: 1; translate: 0 0; }
+    .card-figure {
+      transition: translate 300ms ease, box-shadow 300ms ease;
+    }
+    .card-link { transition: translate 250ms ease; }
+    .filter-item, .portfolio-link, .nav-items .link, .social-link {
+      transition: background-color 220ms ease, color 220ms ease,
+        opacity 220ms ease, translate 220ms ease;
+    }
+    .filter-item:active, .portfolio-link:active { translate: 0 2px; }
+    @media (hover: hover) and (pointer: fine) {
+      .card-item:hover .card-figure, .card-item:focus-within .card-figure {
+        translate: 0 -5px;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, .1);
+      }
+      .card-item:hover .card-link { translate: 3px -3px; }
+      .social-link:hover, .nav-items .link:hover { translate: 0 -2px; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1 !important; translate: none !important; }
+    .card-figure__img, .card-figure__video { transition: none !important; transform: none !important; }
+  }
+</style>
