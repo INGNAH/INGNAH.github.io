@@ -11,9 +11,8 @@ import { pageTag, pageDescription, homeTdk } from '../data/content';
       <div class="opening-composition">
         <h1 id="opening-title" aria-label="设计与编程"><span class="line-mask"><span class="title-line">设计<span class="title-dot">.</span></span></span><span class="line-mask"><span class="title-line title-second"><em>&</em> 编程<span class="title-dot">.</span></span></span></h1>
         <div class="graphic" aria-hidden="true">
-          <div class="graphic-disc"><svg class="disc-cross" viewBox="0 0 200 200" fill="none"><g stroke="currentColor" stroke-width="16"><path d="M100 22v156M22 100h156M45 45l110 110M45 155 155 45" /></g></svg></div>
-          <div class="graphic-label"><span>DESIGN</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19 19 5M5 5h14v14" /></svg><span>CODE</span></div>
-          <span class="graphic-caption">A LITTLE SHIFT.<br />A DIFFERENT PERSPECTIVE.</span>
+          <div class="graphic-disc"><img src="/images/archive-placeholder.png" width="1536" height="1024" alt="" fetchpriority="high" /></div>
+          <span class="graphic-caption">SELECTED WORKS / CREATIVE ARCHIVE</span>
         </div>
       </div>
       <div class="opening-bottom">
@@ -38,7 +37,7 @@ import { pageTag, pageDescription, homeTdk } from '../data/content';
   const renderScroll = () => {
     queued = false;
     const progress = preference.matches ? 0 : Math.min(1, Math.max(0, -opening.getBoundingClientRect().top / opening.offsetHeight));
-    graphic.style.setProperty('--scroll-turn', `${progress * 85}deg`);
+    graphic.style.setProperty('--scroll-turn', `${progress * 8}deg`);
     composition.style.setProperty('--scroll-shift', `${progress * -42}px`);
   };
   const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(renderScroll); } };
@@ -57,16 +56,16 @@ import { pageTag, pageDescription, homeTdk } from '../data/content';
   .opening { padding: 30px 5vw 44px; }
   .opening-top { display: flex; justify-content: space-between; align-items: center; }
   .opening-top i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #85a911; margin-right: 10px; }
-  .opening-composition { position: relative; display: grid; grid-template-columns: 1fr 28%; align-items: center; gap: 24px; padding: 36px 0 30px; transform: translateY(var(--scroll-shift, 0px)); }
+  .opening-composition { position: relative; display: grid; grid-template-columns: 1fr 42%; align-items: center; gap: 24px; padding: 36px 0 30px; transform: translateY(var(--scroll-shift, 0px)); }
   h1 { color: var(--ink); font-family: Arial, "Noto Sans CJK SC", "Noto Sans Mono CJK SC", "Microsoft YaHei", sans-serif; font-size: clamp(64px, 9.5vw, 150px); font-weight: 850; letter-spacing: -.08em; line-height: 1.22; margin: 0; }
   .line-mask { display: block; overflow: hidden; padding-right: 12px; }
   .title-line { display: block; }
   h1 em { font-style: normal; color: transparent; -webkit-text-stroke: 1.7px var(--ink); }
   .title-dot { color: #8ba800; }
-  .graphic { position: relative; justify-self: end; width: 100%; max-width: 310px; padding-top: 22px; }
-  .graphic-disc { background: var(--acid); border-radius: 50%; aspect-ratio: 1; display: grid; place-items: center; transform: rotate(var(--scroll-turn, 0deg)); color: #20211e; }
-  .disc-cross { width: 76%; height: 76%; }
-  .graphic-label { position: absolute; left: -8%; top: 45%; width: 116%; background: var(--ink); color: var(--paper); display: flex; justify-content: space-between; padding: 12px 19px; font: 12px 'Courier New', monospace; transform: rotate(-11deg); }
+  .graphic { position: relative; justify-self: end; width: 100%; max-width: 580px; padding-top: 22px; }
+  .graphic-disc { transform: rotate(var(--scroll-turn, 0deg)); }
+  .graphic-disc img { display: block; width: 100%; height: auto; border-radius: 24px; }
+
   .graphic-caption { display: block; margin: 28px 0 0; text-align: right; opacity: .6; }
   .opening-bottom { display: flex; justify-content: space-between; align-items: end; gap: 30px; padding-top: 22px; }
   .opening-bottom p { font-size: 17px; line-height: 1.8; margin: 0; }
@@ -92,7 +91,7 @@ import { pageTag, pageDescription, homeTdk } from '../data/content';
   @keyframes title-rise { from { transform: translateY(110%); } to { transform: translateY(0); } }
   @keyframes graphic-enter { from { opacity: 0; transform: scale(.6) rotate(-25deg); } to { opacity: 1; transform: none; } }
   @media (max-width: 900px) {
-    .opening-composition { grid-template-columns: 1fr 24%; padding: 48px 0; }
+    .opening-composition { grid-template-columns: 1fr 38%; padding: 48px 0; }
     h1 { font-size: 9.5vw; }
     .graphic-label { font-size: 9px; padding: 9px; }
     .graphic-caption { font-size: 9px; letter-spacing: 0; }
