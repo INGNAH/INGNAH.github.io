@@ -1,34 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Cards from '../components/Cards.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import Social from '../components/Social.astro';
-import { pageTag, pageDescription, homeTdk } from '../data/content';
+import Cards from "../components/Cards.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import {pageTag, pageDescription,homeTdk} from '../data/content';
 ---
-<BaseLayout title={homeTdk.title} description={homeTdk.description} keywords={homeTdk.keywords}>
-  <main class="studio">
-    <section class="opening">
-      <SectionHeader tag={pageTag.index} description={pageDescription.index}>设计&amp;编程</SectionHeader>
-    </section>
-    <section class="selected-work" id="selected-work" aria-labelledby="work-title">
-      <div class="work-heading"><div><span class="eyebrow">01 / THE ARCHIVE</span><h2 id="work-title">每一次尝试，都在这里<svg class="work-heading-arrow" aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 8 30 30M12 38h26V12" /></svg></h2></div><p>视觉、交互与创意实验。<br /><span class="sample-note">原模板示例展示 / 个人作品整理中</span></p></div>
+
+<BaseLayout
+title={homeTdk.title  || ''}
+description ={homeTdk.description  || ''}
+keywords = {homeTdk.keywords  || ''}
+>
+  <div class="section hero">
+    <div class="container">
+      <SectionHeader
+        tag={pageTag.index}
+        description={pageDescription.index}>
+          设计&编程
+      </SectionHeader>
       <Cards />
-    </section>
-    <section class="archive-contact" aria-labelledby="contact-title"><span class="eyebrow">02 / KEEP IN TOUCH</span><div class="contact-layout"><div><h2 id="contact-title">下一个想法，<br />从一次交流开始。</h2><p>关于我的经历、技能，以及还在探索的方向。</p><div class="contact-actions"><a href="/about">认识我 <span aria-hidden="true">↗</span></a><a href="/resume">查看简历 <span aria-hidden="true">↗</span></a></div></div><div class="contact-note"><span>OPEN FOR<br />NEW IDEAS</span><span class="note-star" aria-hidden="true">✳</span><Social /></div></div></section>
-  </main>
+    </div>
+  </div>
+
 </BaseLayout>
 
-
-
 <style>
-.studio{--paper:#faf9f6;--ink:#28243d;--accent:#6550d9;--line:#ddd8eb;background:var(--paper);color:var(--ink);font-family:Arial,'Noto Sans CJK SC','Microsoft YaHei',sans-serif;overflow:clip}
-:global(.theme-dark) .studio{--paper:#201e2a;--ink:#f1eefb;--line:#494358}
-a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #a18bf2;outline-offset:6px}
-.opening{padding:40px 6vw 18px;max-width:1200px;margin:auto}
-.selected-work{padding:40px 6vw 50px;--color-100:var(--ink);--filter-bg:transparent;--filter-color:var(--ink);--filter-color-active:#fff;--filter-bg-active:#6550d9;--filter-bg-hover:#dcd2f5;--filter-border:1px solid var(--line);scroll-margin-top:30px}.work-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:36px}.eyebrow{display:block;font:11px monospace;letter-spacing:2px;color:var(--accent);margin-bottom:22px}h2{font-size:clamp(28px,3.2vw,48px);font-family:inherit;line-height:1.4;color:var(--ink);letter-spacing:-1px}.work-heading-arrow{width:.8em;height:.8em;margin-left:20px;color:var(--accent)}.work-heading p{font-size:13px;line-height:1.9;opacity:.65}.sample-note{font-size:11px}.selected-work :global(.filter-options){justify-content:flex-start;gap:10px}.selected-work :global(.filter-wrapper){padding:12px 0 24px;border-bottom:1px solid var(--line)}.selected-work :global(.filter-options button){border-radius:9px 9px 0 0!important;padding:12px 22px!important}.selected-work :global(.card-item){width:50%;max-width:50%;padding:0 22px;margin-bottom:60px}.selected-work :global(.card-list){margin-left:-22px;margin-right:-22px;width:calc(100% + 44px)}.selected-work :global(.card-header){margin-bottom:0;background:#e7e0f6;color:#46386a;border-radius:16px 16px 0 0;padding:15px 14px}.selected-work :global(.type-tag){color:#56477a}.selected-work :global(.card-figure){border:10px solid #e7e0f6;border-top:0;border-radius:0 0 16px 16px;box-shadow:0 10px 20px #41325c0a;transition:transform .45s,box-shadow .45s}.selected-work :global(.card-figure:hover){transform:translateY(-5px) rotate(-1deg);box-shadow:0 20px 30px #41325c1a}.selected-work :global(.card-item:nth-child(even) .card-header){background:#e5e9f3}.selected-work :global(.card-item:nth-child(even) .card-figure){border-color:#e5e9f3}.selected-work :global(.card-item__title){font:600 clamp(18px,1.6vw,24px) /1.5 Arial,'Microsoft YaHei',sans-serif;color:var(--ink)}.selected-work :global(.card-info){color:var(--ink);opacity:.6;font-size:13px}.selected-work :global(.card-footer){margin-top:20px}.selected-work :global(.tag-original){background:#ded4fa;color:#554092}.selected-work :global(.card-detail){min-width:0}
-.archive-contact{padding:80px 6vw 90px;background:#eee8fa;color:#312848;border-radius:44px 44px 0 0}.archive-contact h2{color:#312848}.contact-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:60px;align-items:center}.archive-contact p{font-size:14px;opacity:.6;margin:20px 0 30px}.contact-actions{display:flex;gap:14px}.contact-actions a{padding:16px 22px;background:#fff;border-radius:12px;display:flex;gap:35px;transition:translate .25s}.contact-actions a:hover{translate:0 -5px}.contact-note{justify-self:center;max-width:360px;width:100%;padding:35px;background:#faf6e9;border-radius:5px;rotate:5deg;box-shadow:8px 12px 0 #d8cceb;position:relative}.contact-note>span:first-child{font:700 clamp(28px,3vw,44px)/1.1 monospace;letter-spacing:-2px}.note-star{position:absolute;right:25px;top:30px;color:#8d70d3;font-size:60px}.contact-note :global(.author){margin-top:25px;border:0}.contact-note :global(.social){padding:0;justify-content:flex-start}
-@media(prefers-reduced-motion:no-preference){.selected-work :global(.card-body[data-reveal="pending"]){clip-path:inset(18% 0 0);opacity:.2}.selected-work :global(.card-body[data-reveal="visible"]){clip-path:inset(-30px -30px -40px);opacity:1}.selected-work :global(.card-body[data-reveal]){transition:clip-path 1s,opacity .8s,translate .8s}.note-star{animation:turn 24s linear infinite}}@keyframes turn{to{transform:rotate(360deg)}}
-@media(max-width:900px){.work-heading{align-items:start;flex-direction:column;gap:10px}.contact-layout{gap:30px}.note-star{font-size:36px;right:15px}.contact-note{padding:25px}}
-@media(max-width:600px){.opening{padding:20px 6vw 0}.selected-work{padding:50px 6vw 20px}.selected-work :global(.card-item){width:100%;max-width:100%;padding:0;margin-bottom:38px}.selected-work :global(.card-list){width:100%;margin:30px 0}.selected-work :global(.filter-options button){padding:9px 12px!important}.archive-contact{padding:45px 6vw 60px;border-radius:25px 25px 0 0}.contact-layout{grid-template-columns:1fr;gap:40px}.contact-note{width:85%;max-width:300px}.contact-actions a{font-size:13px;gap:22px}}
-@media(prefers-reduced-motion:reduce){.studio *{animation:none!important;transition:none!important}}
+  @media (prefers-reduced-motion: no-preference) {
+    .hero :global(.card-body[data-reveal]) {
+      transition: clip-path 1s cubic-bezier(.22, 1, .36, 1),
+        opacity .8s ease var(--reveal-delay, 0ms),
+        translate .8s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms);
+    }
+    .hero :global(.card-body[data-reveal='pending']) {
+      clip-path: inset(18% 0 0);
+    }
+    .hero :global(.card-body[data-reveal='visible']) {
+      clip-path: inset(-30px -30px -40px);
+    }
+  }
 </style>
